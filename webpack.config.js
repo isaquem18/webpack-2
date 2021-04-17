@@ -1,31 +1,31 @@
-const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
-module.exports = {
+module.expots = {
     mode: 'production',
-    entry: resolve(__dirname, 'src', 'index.jsx'),
+    entry: path.resolve(__dirname, 'src', 'index.js'),
     output: {
-        path: resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx']
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: resolve(__dirname, 'public', 'index.html')
-        })
-    ],
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.scss/,
                 exclude: /node_modules/,
-                use: 'babel-loader',
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             }
         ]
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'build', 'index.html')
+        })
+    ],
     devServer: {
-        contentBase: resolve(__dirname, 'build', 'index.html'),
+        contentBase: path.resolve(__dirname, ),
     }
 }
